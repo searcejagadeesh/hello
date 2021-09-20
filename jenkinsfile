@@ -1,44 +1,15 @@
 pipeline {
-    agent any     // if u r using master slave arch then u can use particular label here eg. Prod, QA. 
-    tools {
-        maven 'mymaven'	// The tool name must be pre-configured in Jenkins under Manage Jenkins → Global Tool Configuration.
-    }
+    
      stages {
-     stage('version'){
-        steps {
-            
-                sh 'gcloud --version'
-            }
-            }
-        stage('compile') {
-            steps {
-                sh 'mvn compile'
-            }
-        }
+     
         
-        stage('code review') {
-            steps {
-                sh 'mvn -P matrics pmd:pmd'
-            }
-        }
         
-        stage('unit test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
         
-        stage('matric check') {
-            steps {
-                sh 'mvn cobertura:cobertura -D cobertura.report.format=xml'
-            }
-        }
         
-        stage('package') {
-            steps {
-                sh 'mvn package'
-            }
-        }
+        
+        
+        
+        
       stage('cloudfuntion deploy'){
           steps{
              script {
